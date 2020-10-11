@@ -4,8 +4,6 @@ import urllib.request				# html inspector
 from bs4 import BeautifulSoup 	    # html parser
 from email.mime.text import MIMEText
 
-
-#---------------------------------- Utilities ----------------------------------
 class WebCrawler(object):
 	def __init__(self, url=""):
 		self.html_features = "html.parser"
@@ -17,7 +15,10 @@ class WebCrawler(object):
 		return html
 
 	def get_xml_content(self, url): 
-		return urllib.request.urlopen(url).readlines()
+		xml = urllib.request.urlopen(url)
+		content = xml.readlines()
+		return content
+
 
 class EmailSender(object): 
 	def send_email(self, message): 

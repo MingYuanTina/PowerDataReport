@@ -20,14 +20,16 @@ class Item:
 			and self.operating_limit == item.operating_limit)
 		
 	def __str__(self):
-		return "{self.title} | {self.issue_date} | {self.start_date} | {self.end_date} | {self.operating_limit} | {self.comments}"
+		return "{0} | {1} | {2} | {3} | {4} | {5} \n".format(self.title, self.issue_date, 
+			self.start_date, self.end_date, self.operating_limit, self.comments)
 
 class Parser: 
 	def __init__(self):
 		self.content = ""
 		
 	def stripe_tag(self, index): 
-		return re.sub('<[^>]+>', "", self.content[index].decode("utf-8"))
+		content = self.content[index].decode("utf-8")
+		return re.sub('<[^>]+>', "", content).rstrip()
 
 	def parse_content(self, content):
 		i = 0
@@ -46,7 +48,4 @@ class Parser:
 				i += 7
 			else:
 				i += 1
-		# print(len(dic.items()))
-		# print(len(self.content))
-
 		return dic

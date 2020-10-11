@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="http://reports.ieso.ca/docrefs/stylesheet/TxLimitsOutage0to2Days_HTML_t1-2.xsl" ?>
+<Document docID="TxLimitsOutage0to2Days" xmlns="http://www.ieso.ca/schema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ieso.ca/schema http://reports.ieso.ca/docrefs/schema/TxLimitsOutage0to2Days_r1.xsd">
+<DocHeader>
+<DocTitle>Transmission Facility Outage Limits Report (Days 0 to 2)</DocTitle>
+<DocRevision>1</DocRevision>
+<DocConfidentiality>
+<DocConfClass>PUB</DocConfClass>
+</DocConfidentiality>
+<CreatedAt>2020-10-11T11:07:01</CreatedAt>
+</DocHeader>
+<DocBody>
+<DateRangeStart>2020-10-11</DateRangeStart>
+<DateRangeEnd>2020-10-13</DateRangeEnd>
+<TransmissionFacilityData>
+<TransmissionFacility>Internal</TransmissionFacility>
+<InterfaceData>
+<InterfaceName>Manitoba + Minnesota Import</InterfaceName>
+<IssueDate>2020-09-20T21:12:38</IssueDate>
+<StartDate>2020-08-21T21:00:00</StartDate>
+<EndDate>2020-12-31T23:59:00</EndDate>
+<OperatingLimit>190</OperatingLimit>
+<Comments>Internal system conditions</Comments>
+</InterfaceData>
+<InterfaceData>
+<InterfaceName>P502X</InterfaceName>
+<IssueDate>2020-09-27T09:45:06</IssueDate>
+<StartDate>2020-09-28T06:00:00</StartDate>
+<EndDate>2020-10-30T17:00:00</EndDate>
+<OperatingLimit>665</OperatingLimit>
+<Comments>X504E O/S</Comments>
+</InterfaceData>
+<InterfaceData>
+<InterfaceName>Flow North [FN]</InterfaceName>
+<IssueDate>2020-09-27T09:45:06</IssueDate>
+<StartDate>2020-09-28T06:00:00</StartDate>
+<EndDate>2020-10-30T17:00:00</EndDate>
+<OperatingLimit>600</OperatingLimit>
+<Comments>X504E O/S</Comments>
+</InterfaceData>
+<InterfaceData>
+<InterfaceName>Flow South [FS]</InterfaceName>
+<IssueDate>2020-09-27T09:45:06</IssueDate>
+<StartDate>2020-09-28T06:00:00</StartDate>
+<EndDate>2020-10-30T17:00:00</EndDate>
+<OperatingLimit>760</OperatingLimit>
+<Comments>X504E O/S</Comments>
+</InterfaceData>
+</TransmissionFacilityData>
+<TransmissionFacilityData>
+<TransmissionFacility>Intertie</TransmissionFacility>
+<InterfaceData>
+<InterfaceName>Ontario-New York Import (summer) </InterfaceName>
+<IssueDate>2020-07-01T07:13:24</IssueDate>
+<StartDate>2020-04-30T04:00:00</StartDate>
+<EndDate>2020-12-31T23:59:00</EndDate>
+<OperatingLimit>1400</OperatingLimit>
+<Comments>L33P out of service</Comments>
+</InterfaceData>
+<InterfaceData>
+<InterfaceName>Ontario-New York Export (summer) </InterfaceName>
+<IssueDate>2020-07-01T07:05:25</IssueDate>
+<StartDate>2020-04-30T04:00:00</StartDate>
+<EndDate>2020-12-31T23:59:00</EndDate>
+<OperatingLimit>1600</OperatingLimit>
+<Comments>L33P out of service</Comments>
+</InterfaceData>
+<InterfaceData>
+<InterfaceName>Bryson X2Y Delivery</InterfaceName>
+<IssueDate>2020-08-24T15:16:05</IssueDate>
+<StartDate>2020-08-31T04:00:00</StartDate>
+<EndDate>2020-12-03T19:00:00</EndDate>
+<OperatingLimit>0</OperatingLimit>
+<Comments>X2Y O/S</Comments>
+</InterfaceData>
+<InterfaceData>
+<InterfaceName>Ontario-New York Export Summer</InterfaceName>
+<IssueDate>2020-08-29T19:08:44</IssueDate>
+<StartDate>2020-08-31T06:00:00</StartDate>
+<EndDate>2020-11-30T07:00:00</EndDate>
+<OperatingLimit>1450</OperatingLimit>
+<Comments>PA27 + L33P O/S</Comments>
+</InterfaceData>
+<InterfaceData>
+<InterfaceName>Ontario-New York Import Summer</InterfaceName>
+<IssueDate>2020-08-29T19:07:46</IssueDate>
+<StartDate>2020-08-31T06:00:00</StartDate>
+<EndDate>2020-11-30T07:00:00</EndDate>
+<OperatingLimit>1400</OperatingLimit>
+<Comments>PA27 + L33P O/S</Comments>
+</InterfaceData>
+<InterfaceData>
+<InterfaceName>Ontario-Minnesota Transfer South [MPFS]</InterfaceName>
+<IssueDate>2020-09-04T17:56:52</IssueDate>
+<StartDate>2020-09-14T01:00:00</StartDate>
+<EndDate>2020-10-30T23:00:00</EndDate>
+<OperatingLimit>0</OperatingLimit>
+<Comments>Only for D602F O/S or 96L O/S</Comments>
+</InterfaceData>
+<InterfaceData>
+<InterfaceName>Ontario-New York Export </InterfaceName>
+<IssueDate>2020-09-17T20:57:24</IssueDate>
+<StartDate>2020-09-18T04:00:00</StartDate>
+<EndDate>2020-11-14T23:59:00</EndDate>
+<OperatingLimit>1350</OperatingLimit>
+<Comments>NR2</Comments>
+</InterfaceData>
+<InterfaceData>
+<InterfaceName>Ontario-New York Import </InterfaceName>
+<IssueDate>2020-09-17T20:56:53</IssueDate>
+<StartDate>2020-09-18T04:00:00</StartDate>
+<EndDate>2020-11-14T23:59:00</EndDate>
+<OperatingLimit>1200</OperatingLimit>
+<Comments>NR2</Comments>
+</InterfaceData>
+<InterfaceData>
+<InterfaceName>Ontario-Michigan Export Summer</InterfaceName>
+<IssueDate>2020-09-16T17:00:56</IssueDate>
+<StartDate>2020-09-20T05:00:00</StartDate>
+<EndDate>2020-11-21T18:00:00</EndDate>
+<OperatingLimit>800</OperatingLimit>
+<Comments>L51D O/S</Comments>
+</InterfaceData>
+<InterfaceData>
+<InterfaceName>Ontario-Michigan Import Summer</InterfaceName>
+<IssueDate>2020-09-16T17:00:56</IssueDate>
+<StartDate>2020-09-20T05:00:00</StartDate>
+<EndDate>2020-11-21T18:00:00</EndDate>
+<OperatingLimit>850</OperatingLimit>
+<Comments>L51D O/S</Comments>
+</InterfaceData>
+<InterfaceData>
+<InterfaceName>A41T/A42T Import &amp; Export</InterfaceName>
+<IssueDate>2020-09-18T13:30:06</IssueDate>
+<StartDate>2020-10-03T23:00:00</StartDate>
+<EndDate>2020-10-12T01:00:00</EndDate>
+<OperatingLimit>615</OperatingLimit>
+<Comments>TE - Outaouais GC1 O/S</Comments>
+</InterfaceData>
+<InterfaceData>
+<InterfaceName>Quebec Rapide-Ontario (115kV) Import</InterfaceName>
+<IssueDate>2020-10-01T13:48:20</IssueDate>
+<StartDate>2020-10-05T07:00:00</StartDate>
+<EndDate>2020-12-10T17:00:00</EndDate>
+<OperatingLimit>0</OperatingLimit>
+<Comments>D4Z flow - D4Z O/S</Comments>
+</InterfaceData>
+<InterfaceData>
+<InterfaceName>Ontario-Manitoba Transfer East [OMTE]</InterfaceName>
+<IssueDate>2020-10-05T01:08:13</IssueDate>
+<StartDate>2020-10-05T08:00:00</StartDate>
+<EndDate>2020-10-23T16:00:00</EndDate>
+<OperatingLimit>127</OperatingLimit>
+<Comments>K21W or K22W O/S [Summer Temporary Operating Instruction]</Comments>
+</InterfaceData>
+<InterfaceData>
+<InterfaceName>Ontario-Manitoba Transfer West [OMTW]</InterfaceName>
+<IssueDate>2020-10-05T01:08:13</IssueDate>
+<StartDate>2020-10-05T08:00:00</StartDate>
+<EndDate>2020-10-23T16:00:00</EndDate>
+<OperatingLimit>117</OperatingLimit>
+<Comments>K21W or K22W O/S [Summer Temporary Operating Instruction]</Comments>
+</InterfaceData>
+</TransmissionFacilityData>
+</DocBody>
+</Document>
