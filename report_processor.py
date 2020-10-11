@@ -1,44 +1,11 @@
 #!/usr/local/bin/python3
 
-import smtplib, ssl
-import urllib.request				# html inspector 
-from bs4 import BeautifulSoup 	    # html parser
 from datetime import datetime
-from email.mime.text import MIMEText
-from xml_parser import Parser
-
-#---------------------------------- Utilities ----------------------------------
-class WebCrawler(object):
-	def __init__(self, url=""):
-		self.html_features = "html.parser"
-		self.xml_features = "xml"
-
-	def get_html_content(self, url):
-		page = urllib.request.urlopen(url)
-		html = BeautifulSoup(page, features=self.html_features)
-		return html
-
-	def get_xml_content(self, url): 
-		return urllib.request.urlopen(url).readlines()
-
-class EmailSender(object): 
-	def send_email(self, message): 
-		sender_email = "powerreport202009@gmail.com"
-		receiver_email = "powerreport202009@gmail.com"
-
-		msg = MIMEText(message)
-		msg['From'] = sender_email
-		msg['To'] = receiver_email
-		msg['Subject'] = 'Power Data Report'
-
-		context = ssl.create_default_context()
-		with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as server:
-			server.login("powerreport202009@gmail.com", "smartkids")
-			server.sendmail(sender_email, receiver_email, msg.as_string())
+from report_parser import Parser
+from utilities import WebCrawler, EmailSender
 
 #---------------------------------- Logic  ----------------------------------
-# ReportProcess define comparison rules and run report checking. 
-#   on http://reports.ieso.ca/public/TxLimitsOutage0to2Days/
+# ReportProcess define comparison rules and run checking against http://reports.ieso.ca/public/TxLimitsOutage0to2Days/
 # Compare the most recent report with the second last report output
 # If there is a different, email the user the differences of the two reports. 
 class Report:
@@ -57,10 +24,10 @@ class ReportProcessor(object):
 		self.email_sender = EmailSender()
 		self.directory_url = directory_url
 		self.dir_content = ""
-		self.reports = {}
+		self.diff = ""
 
 
-	def generate_report(self, index=0, reverse=False):
+	def generate_report_content(self, index=0, reverse=False):
 		a_links = self.dir_content.find_all("a")
 		a_index = len(a_links)-index if reverse else index
 		report_tag = a_links[a_index]
@@ -93,20 +60,62 @@ class ReportProcessor(object):
 			diff = diff + xml2[i].decode("utf-8")
 		return diff
 
+	def generate_report_diff(self, dic1, dic2):
+		set1 = set(dic1.keys())
+		set2 = set(dic2.keys())
+		new_lines_dic1 = set1.difference(set2)
+		if (len(new_lines_dic1) != 0):
+			self.diff = self.diff + "Additional Line(s) in NEW report\n"
+			self.__compute_diff__(new_lines_dic1, dic1)
 	
-	def compare_diff(self, first, second):
-		self.dir_content = self.web_crawler.get_html_content(self.directory_url) 
-		most_recent_report = self.generate_report(index=first, reverse=True)
-		second_last_report = self.generate_report(index=second, reverse=True)
+		
+		new_lines_dic2 = set2.difference(set1)
+		if (len(new_lines_dic2) != 0):
+			self.diff = self.diff + "Additional Line(s) in OLD report\n"
+			self.__compute_diff__(new_lines_dic2, dic2)
+			
+		# print(new_lines_dic1)
+		# print(new_lines_dic2)
+		
+		intersection = set1.intersection(set2)
+		for key in intersection:
+			item1 = dic1[key]
+			item2 = dic2[key]
+			if item1.__eq__(item2) == False: 
+				self.dic += "Difference at {item1.title} :\n"
+				self.dic += "New Report: " + item1.__str__() + "\n"
+				self.dic += "Old Report: " + item1.__str__() + "\n"
+	
+	def __compute_diff__(self, l, dic1):
+		for i in range(0, len(l)):
+			key = l[i]
+			item = dic1[key]
+			self.dic += item.__str__()
 
+	
+	def compare_reports_at(self, first_index, second_index):
+		self.dir_content = self.web_crawler.get_html_content(self.directory_url) 
+		most_recent_report = self.generate_report_content(index=first_index, reverse=True)
+		second_last_report = self.generate_report_content(index=second_index, reverse=True)
+
+		# Compute the timestamp difference.
 		last_modified = datetime.strptime(most_recent_report.time, '%H:%M')
 		second_last_modified = datetime.strptime(second_last_report.time, '%H:%M')
 		print("Timestamp Compared: " + str(last_modified) + " vs " + str(second_last_modified))
 
+		# Retrieve the xml content of two reports.
 		xml1 = self.web_crawler.get_xml_content(most_recent_report.url)
 		xml2 = self.web_crawler.get_xml_content(second_last_report.url)
 		diff = ""
 
+		# Parse two reports and store them as dictionary [key=Row], [value=list of columns].
+		parser = Parser()
+		dic1 = parser.parse_content(xml1)
+		dic2 = parser.parse_content(xml2)
+		
+		self.generate_report_diff(dic1, dic2)
+
+		#  Compare two report sets and compute their differences.
 		if (len(xml1) < len(xml2)):
 			diff = self.compute_diff(xml1, xml2)
 		else:
@@ -119,7 +128,7 @@ class ReportProcessor(object):
 			return header + diff
 		
 	def proces_reports(self):
-		content_diff = self.compare_diff(1, 5)
+		content_diff = self.compare_reports_at(1, 5)
 		if (content_diff == None): 
 			self.email_sender.send_email("no difference")
 		else:
