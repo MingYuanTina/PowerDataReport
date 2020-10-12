@@ -27,11 +27,7 @@ class ReportProcessor(object):
 		meta_data = report_tag.next_sibling.lstrip().split(' ')
 		dir_path = self.directory_url
 		filename = report_tag.attrs['href']
-		return Report(
-			dir_path=dir_path, 
-			filename=filename, 
-			date=meta_data[0], 
-			time=meta_data[1])
+		return Report(dir_path=dir_path, filename=filename, date=meta_data[0], time=meta_data[1])
 			
 	# Retrieve the xml content of two reports, parse and store content as dictionary. 
 	def _process_reports_at(self, url1, url2):
