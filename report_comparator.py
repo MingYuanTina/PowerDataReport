@@ -37,7 +37,7 @@ class ReportComparator:
 	def _difference(self, set1, set2, identifier):
 		new_additioinals = set1.difference(set2)
 		if (len(new_additioinals) != 0):
-			self.diff += "additional line(s) in " + identifier +" report:\n"
+			self.diff += "Additional line(s) in " + identifier +" report:\n"
 			for key in new_additioinals:
 				if (identifier == "new"):
 					self.diff += self.new_dic[key].__str__()
@@ -51,7 +51,7 @@ class ReportComparator:
 			old_item = self.old_dic[key]
 			if_import_export = key.lower().find("import") != -1 or key.lower().find("export") != -1
 			if if_import_export and new_item.__eq__(old_item) == False: 
-				self.diff += "Difference at " + new_item.title + " :\n"
+				self.diff += "Differences at " + new_item.title + " :\n"
 				self.diff += "New Report: " + new_item.__str__()
 				self.diff += "Old Report: " + old_item.__str__() + "\n"
 	

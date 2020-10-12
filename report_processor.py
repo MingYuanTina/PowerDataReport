@@ -36,7 +36,7 @@ class ReportProcessor(object):
 		comparator = ReportComparator()
 		diff = comparator.compare_content(xml1, xml2)
 		if (diff != ""): 
-			header = "{0} \n {1} \n".format(url1, url2)
+			header = "New report: {0} \nOld report: {1} \n".format(url1, url2)
 			diff = header + diff
 		return diff
 			

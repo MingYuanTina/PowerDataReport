@@ -25,10 +25,9 @@ class WebCrawler(object):
 			content = xml.readlines()
 			return content
 
-
 class EmailSender(object): 
 	SENDER = "powerreport202009@gmail.com"
-	RECEIVER = "powerreport202009@gmail.com"
+	RECEIVER = "jennifer.xu@brucepower.com"
 	SUBJECT = 'Power Data Report'		
 	
 	def send_emails(self, msg_list): 
