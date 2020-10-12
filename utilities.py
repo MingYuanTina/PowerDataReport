@@ -1,7 +1,7 @@
 #!/usr/local/bin/python3
 import smtplib, ssl
-import urllib.request				# html inspector 
-from bs4 import BeautifulSoup 	    # html parser
+import urllib.request, urllib.error				# html inspector 
+from bs4 import BeautifulSoup 	    			# html parser
 from email.mime.text import MIMEText
 
 class WebCrawler(object):
@@ -15,22 +15,41 @@ class WebCrawler(object):
 		return html
 
 	def get_xml_content(self, url): 
-		xml = urllib.request.urlopen(url)
-		content = xml.readlines()
-		return content
+		try:
+			xml = urllib.request.urlopen(url)
+			content = xml.readlines()
+			return content
+		except urllib.error.URLError as e:
+			print("URL Open Error", e)
+			xml = urllib.request.urlopen(url)
+			content = xml.readlines()
+			return content
 
 
 class EmailSender(object): 
+	SENDER = "powerreport202009@gmail.com"
+	RECEIVER = "powerreport202009@gmail.com"
+	SUBJECT = 'Power Data Report'
+	
+	def send_emails(self, msg_list): 
+		context = ssl.create_default_context()
+		with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as server:
+			server.login("powerreport202009@gmail.com", "smartkids")
+			for message in msg_list:
+				msg = MIMEText(message)
+				msg['From'] = EmailSender.SENDER
+				msg['To'] = EmailSender.RECEIVER
+				msg['Subject'] = EmailSender.SUBJECT
+				server.sendmail(EmailSender.SENDER, EmailSender.RECEIVER, msg.as_string())
+		
+	
 	def send_email(self, message): 
-		sender_email = "powerreport202009@gmail.com"
-		receiver_email = "powerreport202009@gmail.com"
-
 		msg = MIMEText(message)
-		msg['From'] = sender_email
-		msg['To'] = receiver_email
-		msg['Subject'] = 'Power Data Report'
+		msg['From'] = EmailSender.SENDER
+		msg['To'] = EmailSender.RECEIVER
+		msg['Subject'] = EmailSender.SUBJECT
 
 		context = ssl.create_default_context()
 		with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as server:
 			server.login("powerreport202009@gmail.com", "smartkids")
-			server.sendmail(sender_email, receiver_email, msg.as_string())
+			server.sendmail(EmailSender.SENDER, EmailSender.RECEIVER, msg.as_string())

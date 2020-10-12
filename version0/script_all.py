@@ -118,7 +118,7 @@ class ReportProcessor(object):
 			return header + diff
 		
 	def proces_reports(self):
-		for i in range(1, 5, 4): 
+		for i in range(1, 68, 4): 
 			content_diff = self.compare_diff(i, i+4)
 			if (content_diff == None): 
 				self.email_sender.send_email("no difference")

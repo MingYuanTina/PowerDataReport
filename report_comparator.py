@@ -61,9 +61,9 @@ class ReportComparator:
 		
 		set1 = set(self.new_dic.keys())
 		set2 = set(self.old_dic.keys())
-		self._difference(set1, set2, "new") # compute any additional lines in new report
-		self._difference(set2, set1, "old") # compute any additional lines in old report
-		self._intersection(set1, set2)
+		self._difference(set1, set2, "new") # compute any additional lines in new report.
+		self._difference(set2, set1, "old") # compute any additional lines in old report.
+		self._intersection(set1, set2)		# compute any differences between existing lines in common.
 		return self.diff
 	
 
