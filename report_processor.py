@@ -13,18 +13,11 @@ class Report:
 		self.date = date   # last modified date
 		self.time = time   # last modified time
 
-	def _print(self):
-		print('Report: ' + self.url + ' modified on ' + self.date + " " + self.time)
-
 class ReportProcessor(object):
 	def __init__(self, directory_url=""):
 		self.web_crawler = WebCrawler()
 		self.email_sender = EmailSender()
-		self.comparator = ReportComparator()
 		self.directory_url = directory_url
-		self.diff = ""
-		self.new_report = Report()
-		self.old_report = Report()
 
 	def _generate_report_object(self, dir_content="", index=0, reverse=False):
 		a_links = dir_content.find_all("a")
@@ -39,21 +32,17 @@ class ReportProcessor(object):
 			filename=filename, 
 			date=meta_data[0], 
 			time=meta_data[1])
-		
-	def _get_reports_at(self, first_index, second_index):
-		dir_content = self.web_crawler.get_html_content(self.directory_url) 
-		self.new_report = self._generate_report_object(dir_content, index=first_index, reverse=True)
-		self.old_report = self._generate_report_object(dir_content, index=second_index, reverse=True)
 			
 	# Retrieve the xml content of two reports, parse and store content as dictionary. 
 	def _process_reports_at(self, url1, url2):
 		xml1 = self.web_crawler.get_xml_content(url1)
 		xml2 = self.web_crawler.get_xml_content(url2)
-		self.diff = self.comparator.compare_content(xml1, xml2)
-		if (self.diff != ""): 
+		comparator = ReportComparator()
+		diff = comparator.compare_content(xml1, xml2)
+		if (diff != ""): 
 			header = "{0} \n {1} \n".format(url1, url2)
-			self.diff = header + self.diff
-		return self.diff
+			diff = header + diff
+		return diff
 			
 	def main(self, comparison_num): # return differences of two reports.
 		interval = 4
@@ -71,8 +60,8 @@ class ReportProcessor(object):
 			print("Timestamp Compared: " + str(last_modified) + " vs " + str(second_last_modified))
 			if (diff != ""):
 				msg_list.append(diff)
-			else:
-				print("no difference")
+				print("There is a difference. Email is sent to the mailbox")
+		print("Total email sent: ", len(msg_list))
 		self.email_sender.send_emails(msg_list)
         
         
