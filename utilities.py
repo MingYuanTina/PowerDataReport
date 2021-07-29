@@ -33,7 +33,7 @@ class EmailSender(object):
 	def send_emails(self, msg_list): 
 		context = ssl.create_default_context()
 		with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as server:
-			server.login("powerreport202009@gmail.com", "smartkids")
+			server.login("powerreport202009@gmail.com", "smartkids2021")
 			for message in msg_list:
 				self._send_email(message, server)
 		
